@@ -1,0 +1,34 @@
+-- title:   git project
+-- author:  obi3112
+-- desc:    short description
+-- site:    website link
+-- license: MIT License (change this to your license of choice)
+-- version: 0.1
+-- script:  lua
+mode="home" --default game state
+function waitForInput()
+	if mode=="home" then
+		cls()
+		print("Hello world", 0, 0, 12)
+	end
+	if key(24) then --x
+		mode = "menu"
+	end
+end
+
+function menu()
+		if mode=="menu" then
+			cls()
+			print("THIS iS the menu!", 10, 10, 12)
+		end
+		if key(26) then
+			mode="home"
+		end
+end
+
+
+function TIC()
+cls()
+waitForInput()
+menu()
+end
