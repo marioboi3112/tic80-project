@@ -34,7 +34,6 @@ function player()
 	}
 	playerSpr = spr(256,10,10,-1, 1, 0, 0,1,1)
 end
-
 function TIC()
 cls()
 waitForInput()
