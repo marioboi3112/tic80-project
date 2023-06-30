@@ -1,0 +1,43 @@
+-- author:  obi3112
+-- desc:    short description
+-- site:    website link
+-- license: MIT License (change this to your license of choice)
+-- version: 0.1
+-- date : 29/06/2023 (DD/MM/YY format)
+-- script:  lua
+mode="menu" --default game state
+function waitForInput()
+	if mode=="menu" then
+		cls(2)
+		print("MENU", 50, 50, 12)
+	end
+	if key(24) then --x
+		mode = "game"
+	end
+end
+
+function menu()
+		if mode=="game" then
+			cls(1)
+			print("welcome to the game user!", 10, 10, 12)
+		end
+		if key(26) then
+			mode="menu"
+		end
+end
+function player()
+	Player = {
+		x=10,
+		y=10,
+		w=20,
+		h=20
+	}
+	playerSpr = spr(256,Player.x,Player.y,-1, -1, 0, 0,Player.w,Player.h)
+end
+
+function TIC()
+cls()
+waitForInput()
+menu()
+player()
+end
