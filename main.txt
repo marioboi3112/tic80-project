@@ -5,6 +5,9 @@
 -- version: 0.1
 -- date : 29/06/2023 (DD/MM/YY format)
 -- script:  lua
+--THIS CODE IS TAKEN FROM THE MAIN GAME FILE
+--SINCE THE MAIN FILE CAN NOT BE READ BY GITHUB
+--THE CODE IS NOW PUT INSIDE A TXT FORMAT
 mode= "menu" --default game state
 function waitForInput()
 	if mode=="menu" then
