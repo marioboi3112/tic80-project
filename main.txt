@@ -98,10 +98,10 @@ function keystroke()
 			local aBox = rect(keys.aX, keys.aY, 5, 5, 2)
 			local sBox = rect(keys.sX, keys.sY, 5, 5, 2)
 			local dBox = rect(keys.dX, keys.dY, 5, 5, 2)
-		w =	print("W", keys.wX,keys.wY,3)
+		w = print("W", keys.wX,keys.wY,3)
 		a = print("A", keys.aX,keys.aY,3)
 		s = print("S", keys.sX,keys.sY,3)
-		d =  print("D", keys.dX,keys.dY,3)
+		d = print("D", keys.dX,keys.dY,3)
 			
 			if key(23) then print("W", keys.wX,keys.wY,0)end
 			if key(1) then print("A", keys.aX,keys.aY,0)end
