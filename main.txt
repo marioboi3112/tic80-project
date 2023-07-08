@@ -103,8 +103,8 @@ function keystroke()
 		s = print("S", keys.sX,keys.sY,3)
 		d = print("D", keys.dX,keys.dY,3)
 			
-			if key(23) then print("W", keys.wX,keys.wY,0)end
-			if key(1) then print("A", keys.aX,keys.aY,0)end
+   if key(23) then print("W", keys.wX,keys.wY,0)end
+   if key(1) then print("A", keys.aX,keys.aY,0)end
    if key(19) then print("S", keys.sX,keys.sY,0)end
    if key(4) then print("D", keys.dX,keys.dY,0)end
 end
