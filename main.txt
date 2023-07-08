@@ -9,7 +9,7 @@
 --SINCE THE MAIN FILE CAN NOT BE READ BY GITHUB
 --THE CODE IS NOW PUT INSIDE A TXT FORMAT
 
---global variables start
+
 player = {x=50,y=50}
 diagBox = {
 	x=70,
@@ -19,15 +19,20 @@ diagBox = {
 }
 dialogueIndex = 1
 dialogues = {
-    "Hello! How can I assist you?",
-    "I'm here to help.\n What do you need?",
-    "Feel free to ask me anything!"
+    "Welcome to my tic80 project\n press z to continue",
+    "this is a simple game that i \ncoded in tic80",
+    "You can press the spacebar \nfor tutorial"
 }
---global variables end
 mode="menu" --default game state
 scr=14
 function menu()
 if mode=="menu"then
+ for i=1, 100 do
+ 	for j=1, 100 do
+			col=math.random(1,16)
+  	circ(i*13, j*9, 3, col) 
+ 	end
+ end
  print("PRESS X TO PLAY", 50,50,12)
  if key(24) then
   mode="game"
@@ -70,17 +75,17 @@ function loadDialogue(text)
 if keyp(26) then
         dialogueIndex = dialogueIndex + 1
         if dialogueIndex > #dialogues then
-            dialogueIndex = 1
+        	cls()
+         game()
+         dialogues = ""
         end
     end
     print(dialogues[dialogueIndex], diagBox.x, diagBox.y+5,12)
 end
 function game()
-cls(scr)
 movePlayer()
 keystroke()
 screenCollision()
-loadDialogue()
 drawPlayer()
 end
 local keys = { --variables for the keystroke
@@ -94,21 +99,22 @@ local keys = { --variables for the keystroke
 			dY = 10
 }
 function keystroke()
-		local wBox = rect(keys.wX, keys.wY, 5, 5, 2)
-		local aBox = rect(keys.aX, keys.aY, 5, 5, 2)
-		local sBox = rect(keys.sX, keys.sY, 5, 5, 2)
-		local dBox = rect(keys.dX, keys.dY, 5, 5, 2)
-		w = print("W", keys.wX,keys.wY,3)
+			local wBox = rect(keys.wX, keys.wY, 5, 5, 2)
+			local aBox = rect(keys.aX, keys.aY, 5, 5, 2)
+			local sBox = rect(keys.sX, keys.sY, 5, 5, 2)
+			local dBox = rect(keys.dX, keys.dY, 5, 5, 2)
+		w =	print("W", keys.wX,keys.wY,3)
 		a = print("A", keys.aX,keys.aY,3)
 		s = print("S", keys.sX,keys.sY,3)
-		d = print("D", keys.dX,keys.dY,3)
+		d =  print("D", keys.dX,keys.dY,3)
 			
-   if key(23) then print("W", keys.wX,keys.wY,0)end
-   if key(1) then print("A", keys.aX,keys.aY,0)end
+			if key(23) then print("W", keys.wX,keys.wY,0)end
+			if key(1) then print("A", keys.aX,keys.aY,0)end
    if key(19) then print("S", keys.sX,keys.sY,0)end
    if key(4) then print("D", keys.dX,keys.dY,0)end
 end
 function TIC()
-	cls()
+	cls(scr)
 	menu()
+	loadDialogue()
 end
