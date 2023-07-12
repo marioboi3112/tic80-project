@@ -8,7 +8,18 @@
 --THIS CODE IS TAKEN FROM THE MAIN GAME FILE
 --SINCE THE MAIN FILE CAN NOT BE READ BY GITHUB
 --THE CODE IS NOW PUT INSIDE A TXT FORMAT
- a simple game that i \ncoded in tic80",
+ 
+player = {x=50,y=50}
+diagBox = {
+	x=70,
+	y=80,
+	w=170,
+	h=50
+}
+dialogueIndex = 1
+dialogues = {
+    "Welcome to my tic80 project\n press z to continue",
+    "this is a simple game that i \ncoded in tic80",
     "You can press the spacebar \nfor tutorial"
 }
 mode="menu" --default game state
@@ -59,11 +70,15 @@ end
 
 function loadDialogue(text)
 	text = rectb(diagBox.x,diagBox.y,diagBox.w,diagBox.h, 12)
-	
+	diagSfx = false
 	if keyp(26) then
 	 dialogueIndex = dialogueIndex + 1
 		--adding sound effects for the dialogue.
-		diagSfx = sfx(0,-1,-1,0,15,0)
+		diagSfx = true
+		if diagSfx == true then
+			sfx(0,-1,-1,0,15,0)
+		end
+		diagSfx = false
 		if dialogueIndex > #dialogues then
 			--remove the dialogues text
 			diagBox.w = 0
