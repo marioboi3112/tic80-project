@@ -9,7 +9,6 @@
 --SINCE THE MAIN FILE CAN NOT BE READ BY GITHUB
 --THE CODE IS NOW PUT INSIDE A TXT FORMAT
 
-
 player = {x=50,y=50}
 diagBox = {
 	x=70,
@@ -28,9 +27,9 @@ scr=14
 function menu()
 if mode=="menu"then
  for i=1, 100 do
+ col=math.random(1,16)
  	for j=1, 100 do
-			col=math.random(1,16)
-  	circ(i*13, j*9, 3, col) 
+			circ(i*13, j*9, 3, col) 
  	end
  end
  print("PRESS X TO PLAY", 50,50,12)
@@ -71,15 +70,16 @@ end
 
 function loadDialogue(text)
 	text = rectb(diagBox.x,diagBox.y,diagBox.w,diagBox.h, 12)
-
-if keyp(26) then
-        dialogueIndex = dialogueIndex + 1
-        if dialogueIndex > #dialogues then
-        	cls()
-         game()
-         dialogues = ""
-        end
-    end
+	
+	if keyp(26) then
+	 dialogueIndex = dialogueIndex + 1
+		if dialogueIndex > #dialogues then
+			--remove the dialogues text
+			diagBox.w = 0
+			diagBox.h = 0
+			
+		end
+	end
     print(dialogues[dialogueIndex], diagBox.x, diagBox.y+5,12)
 end
 function game()
@@ -87,6 +87,7 @@ movePlayer()
 keystroke()
 screenCollision()
 drawPlayer()
+loadDialogue()
 end
 local keys = { --variables for the keystroke
 			wX = 10,
@@ -116,5 +117,4 @@ end
 function TIC()
 	cls(scr)
 	menu()
-	loadDialogue()
 end
