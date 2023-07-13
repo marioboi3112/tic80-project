@@ -7,5 +7,5 @@ since github can not read the .tic files, the code is put in a txt format and yo
 
 
 <bold><h1>itch.io page</h1></bold>
-I will be adding a itch.io page for the project after the first version of the project is completed.
+I will be adding an <a href="https://www.itch.io/">itch.io</a> page for the project after the first version of the project is completed.
 until then there will be no itch page for the project for now.
