@@ -1,4 +1,5 @@
 # tic80-project
+<img src="screenshots/1.png" width="650px" height="250px"/>
 a simple game made in tic80
 This is a simple game i am making just for fun
 The software used is TIC-80
@@ -7,6 +8,5 @@ since github can not read the .tic files, the code is put in a txt format and yo
 
 
 <h1>itch.io page</h1>
-<img src="screenshots/1.png" width="650px" height="250px"/>
 I will be adding a itch.io page for the project after the first version of the project is completed.
 until then there will be no itch page for the project for now.
