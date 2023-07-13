@@ -1,6 +1,6 @@
 # tic80-project
 <img src="screenshots/1.png" width="650px" height="250px"/>
-This is a simple game that i made using a <a href=""https://en.wikipedia.org/wiki/Fantasy_video_game_console>fantasy console</a> i am making just for fun
+This is a simple game that i made using a <a href="https://en.wikipedia.org/wiki/Fantasy_video_game_console">fantasy console</a> i am making just for fun
 The fantasy console used is <a href="https://tic80.com/">TIC-80</a>
 <h1>How to get the source code</h1>
 since github can not read the .tic files, the code is put in a txt format and you can get the code from the main.txt file. 
