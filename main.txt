@@ -1,3 +1,4 @@
+-- title:   git project
 -- author:  obi3112
 -- desc:    short description
 -- site:    website link
@@ -5,10 +6,9 @@
 -- version: 0.1
 -- date : 29/06/2023 (DD/MM/YY format)
 -- script:  lua
---THIS CODE IS TAKEN FROM THE MAIN GAME FILE
---SINCE THE MAIN FILE CAN NOT BE READ BY GITHUB
---THE CODE IS NOW PUT INSIDE A TXT FORMAT
- 
+--GLOBAL VARIABLES
+
+--GLOBAL VARIABLES END
 player = {x=50,y=50}
 diagBox = {
 	x=70,
@@ -68,27 +68,36 @@ function screenCollision()
 	end
 end
 
+function moving_walls()
+	wall = rect(200, 0, 128-12,130 , 12)
+	--debugging to find the positions of the player
+	print(tostring("X: " .. player.x .. " Y: " .. player.y), 0, 15, 12)
+end
 function loadDialogue(text)
 	text = rectb(diagBox.x,diagBox.y,diagBox.w,diagBox.h, 12)
-	diagSfx = false
 	if keyp(26) then
 	 dialogueIndex = dialogueIndex + 1
 		--adding sound effects for the dialogue.
-		diagSfx = true
-		if diagSfx == true then
-			sfx(0,-1,-1,0,15,0)
+		diagSfxBool = t
+		if diagSfxBool == t then
+			diagSfx = sfx(0,-1,-1,0,15,0)
 		end
-		diagSfx = false
+		diagSfxBool = f
+
 		if dialogueIndex > #dialogues then
 			--remove the dialogues text
 			diagBox.w = 0
 			diagBox.h = 0
 			dialogues[dialogueIndex] = ""
 		end
+		if diagSfxBool == f then
+			
+		end
 	end
     print(dialogues[dialogueIndex], diagBox.x, diagBox.y+5,12)
 end
 function game()
+moving_walls()
 movePlayer()
 keystroke()
 screenCollision()
