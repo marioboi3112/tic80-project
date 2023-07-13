@@ -6,6 +6,6 @@ The software used is TIC-80
 since github can not read the .tic files, the code is put in a txt format and you can get the code from the main.txt file. 
 
 
-<h1 style="color:pink;">itch.io page</h1>
+<h1>itch.io page</h1>
 I will be adding a itch.io page for the project after the first version of the project is completed.
 until then there will be no itch page for the project for now.
