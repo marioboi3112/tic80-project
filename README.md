@@ -3,7 +3,7 @@
 This is a simple game that i made using a <a href="https://en.wikipedia.org/wiki/Fantasy_video_game_console">fantasy console</a>.I am making this just for fun,
 The fantasy console used is <a href="https://tic80.com/">TIC-80</a>
 <bold><h1>How to get the source code</h1></bold>
-since github can not read the .tic files, the code is put in a txt format and you can get the code from the main.txt file. 
+since github can not read the .tic files, the code is put in a txt format and you can get the code from the <a href="main.txt">main.txt</a> file. 
 
 
 <bold><h1>itch.io page</h1></bold>
