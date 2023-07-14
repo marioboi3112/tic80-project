@@ -16,6 +16,7 @@ diagBox = {
 	w=170,
 	h=50
 }
+
 dialogueIndex = 1
 dialogues = {
     "Welcome to my tic80 project\n press z to continue",
@@ -38,18 +39,16 @@ if mode=="menu"then
  end
  elseif mode=="game" then  game()end
 end
-function drawPlayer()
-	playerSpr = spr(256,player.x,player.y,-1, 1, 0, 0,1,1)
-end
+
 function movePlayer()
-	if key(23)then --up
+	if btn(0)then --up
 		player.y = player.y - 2
-	elseif key(19)then --down
+	elseif btn(1)then --down
 		player.y = player.y + 2
 	end
-	if key(1)then --left
+	if btn(2)then --left
 		player.x = player.x - 2
-	elseif key(4)then --right
+	elseif btn(3)then --right
 		player.x = player.x + 2
 	end
 end
@@ -71,9 +70,10 @@ end
 function moving_walls()
 	wall = rect(200, 0, 128-12,130 , 12)
 	--debugging to find the positions of the player
-	print(tostring("X: " .. player.x .. " Y: " .. player.y), 0, 15, 12)
+	print(tostring("X: " .. player.x .. " Y: " .. player.y), 0, 18, 12)
 end
 function loadDialogue(text)
+	playerSpr = spr(256,player.x,player.y,-1, 1, 0, 0,1,1)
 	text = rectb(diagBox.x,diagBox.y,diagBox.w,diagBox.h, 12)
 	if keyp(26) then
 	 dialogueIndex = dialogueIndex + 1
@@ -81,53 +81,46 @@ function loadDialogue(text)
 		diagSfxBool = t
 		if diagSfxBool == t then
 			diagSfx = sfx(0,-1,-1,0,15,0)
+			diagSfxBool = f
 		end
-		diagSfxBool = f
-
+		
 		if dialogueIndex > #dialogues then
 			--remove the dialogues text
 			diagBox.w = 0
 			diagBox.h = 0
+			diagBox.h = 0
 			dialogues[dialogueIndex] = ""
 		end
-		if diagSfxBool == f then
-			
-		end
 	end
-    print(dialogues[dialogueIndex], diagBox.x, diagBox.y+5,12)
+	print(dialogues[dialogueIndex], diagBox.x, diagBox.y+5,12)
 end
 function game()
 moving_walls()
 movePlayer()
 keystroke()
 screenCollision()
-drawPlayer()
 loadDialogue()
 end
 local keys = { --variables for the keystroke
 			wX = 10,
-			wY = 4,
-			aX = 4,
+			wY = 1,
+			aX = 1,
 			aY = 10,
 			sX = 10,
 			sY = 10,
-			dX = 16,
+			dX = 19,
 			dY = 10
 }
 function keystroke()
-			local wBox = rect(keys.wX, keys.wY, 5, 5, 2)
-			local aBox = rect(keys.aX, keys.aY, 5, 5, 2)
-			local sBox = rect(keys.sX, keys.sY, 5, 5, 2)
-			local dBox = rect(keys.dX, keys.dY, 5, 5, 2)
-		w =	print("W", keys.wX,keys.wY,3)
-		a = print("A", keys.aX,keys.aY,3)
-		s = print("S", keys.sX,keys.sY,3)
-		d =  print("D", keys.dX,keys.dY,3)
-			
-			if key(23) then print("W", keys.wX,keys.wY,0)end
-			if key(1) then print("A", keys.aX,keys.aY,0)end
-   if key(19) then print("S", keys.sX,keys.sY,0)end
-   if key(4) then print("D", keys.dX,keys.dY,0)end
+	w =	spr(2, keys.wX,keys.wY,3) 
+	a = spr(4, keys.aX,keys.aY,3) 
+	s = spr(3, keys.sX,keys.sY,3)
+	d = spr(5, keys.dX,keys.dY,3)
+	--changing keystroke state
+	if btn(0) then spr(6, keys.wX,keys.wY,3)end --w
+	if btn(2) then spr(8, keys.aX,keys.aY,3)end --s
+ if btn(1) then spr(7, keys.sX,keys.sY,3)end --a
+ if btn(3) then spr(9, keys.dX,keys.dY,3)end --d
 end
 function TIC()
 	cls(scr)
