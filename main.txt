@@ -19,9 +19,9 @@ diagBox = {
 
 dialogueIndex = 1
 dialogues = {
-    "Welcome to my tic80 project\n press z to continue",
-    "this is a simple game that i \ncoded in tic80",
-    "You can press the spacebar \nfor tutorial"
+    "Welcome to my tic80 project\n press Z to continue",
+    "this is a simple game that i \ncoded in tic80.press Z to continue",
+    "You may press Z again to end this dialogue.",
 }
 mode="menu" --default game state
 scr=14
@@ -72,24 +72,20 @@ function moving_walls()
 	--debugging to find the positions of the player
 	print(tostring("X: " .. player.x .. " Y: " .. player.y), 0, 18, 12)
 end
-function loadDialogue(text)
+function loadDialogue()
 	playerSpr = spr(256,player.x,player.y,-1, 1, 0, 0,1,1)
 	text = rectb(diagBox.x,diagBox.y,diagBox.w,diagBox.h, 12)
 	if keyp(26) then
 	 dialogueIndex = dialogueIndex + 1
 		--adding sound effects for the dialogue.
-		diagSfxBool = t
-		if diagSfxBool == t then
-			diagSfx = sfx(0,-1,-1,0,15,0)
-			diagSfxBool = f
-		end
-		
+		diagSfx = sfx(0,-1,-1,0,15,0)	
 		if dialogueIndex > #dialogues then
 			--remove the dialogues text
 			diagBox.w = 0
 			diagBox.h = 0
-			diagBox.h = 0
 			dialogues[dialogueIndex] = ""
+		--stopping the sound from playing.
+			diagSfx = sfx(-1)
 		end
 	end
 	print(dialogues[dialogueIndex], diagBox.x, diagBox.y+5,12)
