@@ -4,7 +4,7 @@
 -- site:    website link
 -- license: MIT License (change this to your license of choice)
 -- version: 0.1
--- date : 29/06/2023 (DD/MM/YY format)
+-- date : 29/06/2023 (DD/MM/YYYY format)
 -- script:  lua
 --GLOBAL VARIABLES
 
@@ -93,30 +93,8 @@ end
 function game()
 moving_walls()
 movePlayer()
-keystroke()
 screenCollision()
 loadDialogue()
-end
-local keys = { --variables for the keystroke
-			wX = 10,
-			wY = 1,
-			aX = 1,
-			aY = 10,
-			sX = 10,
-			sY = 10,
-			dX = 19,
-			dY = 10
-}
-function keystroke()
-	w =	spr(2, keys.wX,keys.wY,3) 
-	a = spr(4, keys.aX,keys.aY,3) 
-	s = spr(3, keys.sX,keys.sY,3)
-	d = spr(5, keys.dX,keys.dY,3)
-	--changing keystroke state
-	if btn(0) then spr(6, keys.wX,keys.wY,3)end --w
-	if btn(2) then spr(8, keys.aX,keys.aY,3)end --s
- if btn(1) then spr(7, keys.sX,keys.sY,3)end --a
- if btn(3) then spr(9, keys.dX,keys.dY,3)end --d
 end
 function TIC()
 	cls(scr)
