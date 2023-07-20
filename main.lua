@@ -1,4 +1,4 @@
-	-- title:   git project
+-- title:   git project
 -- author:  obi3112
 -- desc:    simple game that is coded for fun ig lol.
 -- site:    website link
@@ -13,7 +13,6 @@ chairData = {x=116 - 20, y=64-20}
 gunData = {}
 paintingData = {}
 --PROPS END
-
 
 player = {x=116,y=64} --player position at center.
 diagBox = {
@@ -111,6 +110,26 @@ function loadProps()
 --	gun = spr()
 --	painting = spr()
 end
+routine_1 = coroutine.create(function() 
+ for i=1, 10 do
+  trace(i,12)
+  if (i==5) then
+   coroutine.yield()
+  end
+ end
+end)
+tab = {1,2,3}
+table.insert(tab,2,3)
+trace(table.unpack(tab))
+routine_2 = coroutine.create(function ()
+	for i=11, 20 do
+		trace(i,12)
+	end
+end)
+coroutine.resume(routine_1)
+coroutine.resume(routine_2)
+coroutine.resume(routine_1)
+
 function TIC()
 	cls(scr)
 	menu()
