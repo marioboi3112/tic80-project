@@ -100,35 +100,17 @@ function loadDialogue()
 end
 function game()
 	--moving_walls()
+	loadProps()
 	movePlayer()
 	playerCollisions()
 	loadDialogue()
-	loadProps()
 end
 function loadProps()
 	chair = spr(10, chairData.x, chairData.y, 0, 1, 0,0,1,1)
 --	gun = spr()
 --	painting = spr()
 end
-routine_1 = coroutine.create(function() 
- for i=1, 10 do
-  trace(i,12)
-  if (i==5) then
-   coroutine.yield()
-  end
- end
-end)
-tab = {1,2,3}
-table.insert(tab,2,3)
-trace(table.unpack(tab))
-routine_2 = coroutine.create(function ()
-	for i=11, 20 do
-		trace(i,12)
-	end
-end)
-coroutine.resume(routine_1)
-coroutine.resume(routine_2)
-coroutine.resume(routine_1)
+
 
 function TIC()
 	cls(scr)
