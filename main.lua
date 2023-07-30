@@ -11,6 +11,7 @@
 --PROPS START
 chairData = {x=116 - 20, y=64-20}
 gunData = {}
+tableData = {x=(116-20)+10, y=64-20}
 paintingData = {}
 --PROPS END
 
@@ -99,16 +100,14 @@ function loadDialogue()
 	print(dialogues[dialogueIndex], diagBox.x, diagBox.y+5,12)
 end
 function game()
-	--moving_walls()
-	loadProps()
+	renderProps()
 	movePlayer()
 	playerCollisions()
 	loadDialogue()
 end
-function loadProps()
-	chair = spr(10, chairData.x, chairData.y, 0, 1, 0,0,1,1)
---	gun = spr()
---	painting = spr()
+function renderProps()
+	chairSpr = spr(10, chairData.x, chairData.y, 0, 1, 0,0,1,1)
+	tableSpr = spr(11, tableData.x, tableData.y, 0,1,0,0,1,1,1)
 end
 
 
