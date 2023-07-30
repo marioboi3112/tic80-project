@@ -10,8 +10,8 @@
 --adding props to the game
 --PROPS START
 chairData = {x=116 - 20, y=64-20}
-gunData = {}
-tableData = {x=(116-20)+10, y=64-20}
+gunData = {id=17,x=106,y=40}
+tableData = {x=106, y=44}
 paintingData = {}
 --PROPS END
 
@@ -27,6 +27,9 @@ dialogueIndex = 1
 dialogues = {
     "Welcome to my tic80 project\n press Z to continue",
     "this is a simple game that i \ncoded in tic80.press Z to continue",
+    "make sure to read the instructions \n to deal with any confusion \n when playing the game.",
+    "there are some items that you may or may not \n be able to pick up. \n such items that you can pick up have a white \n box around them like the gun on the table",
+   	"go and press Z to pick it up!",
     "You may press Z again to end this dialogue.",
 }
 mode="menu" --default game state
@@ -39,7 +42,7 @@ if mode=="menu"then
 			circ(i*13, j*9, 3, col) 
  	end
  end
- print("PRESS X TO PLAY", 50,50,12)
+ print("PRESS X TO PLAY", 50,50,0)
  if key(24) then
   mode="game"
  end
@@ -108,6 +111,7 @@ end
 function renderProps()
 	chairSpr = spr(10, chairData.x, chairData.y, 0, 1, 0,0,1,1)
 	tableSpr = spr(11, tableData.x, tableData.y, 0,1,0,0,1,1,1)
+	gunSpr = spr(gunData.id, gunData.x, gunData.y,4,1,0,0,1,1,1)
 end
 
 
