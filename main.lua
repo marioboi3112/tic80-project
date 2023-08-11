@@ -4,8 +4,8 @@
 -- site:    website link
 -- license: MIT License (change this to your license of choice)
 -- version: 0.1
--- date : 29/06/2023 (DD/MM/YYYY format)
--- script:  lua
+-- date: 29/06/2023 (DD/MM/YYYY format)
+-- script: lua
 
 --adding props to the game
 --PROPS START
@@ -34,6 +34,13 @@ dialogues = {
 }
 mode="menu" --default game state
 scr=15
+function pickItems()
+ --pick gun
+ local gunPlayerDistXPos=gunData.x - player.x
+ local gunPlayerDistYPos=gunData.y - player.y
+ print(gunPlayerDistXPos .. " " .. gunPlayerDistYPos, 0, 0, 12) 
+end
+
 function menu()
 if mode=="menu"then
  for i=1, 100 do
@@ -88,14 +95,14 @@ function loadDialogue()
 	if keyp(26) then
 	 dialogueIndex = dialogueIndex + 1
 		--adding sound effects for the dialogue.
-		diagSfx = sfx(0,-1,-1,0,15,0)	
+		--diagSfx = sfx(1,"E-4")	
 		if dialogueIndex > #dialogues then
 			--remove the dialogues text
 			diagBox.w = 0
 			diagBox.h = 0
 			dialogues[dialogueIndex] = ""
 		--stopping the sound from playing.
-			diagSfx = sfx(-1)
+			--diagSfx = sfx(-1)
 		--start playing the music.
 		--msc = music(-1, 60,16,true,false,145,1)
 		end
@@ -107,6 +114,7 @@ function game()
 	movePlayer()
 	playerCollisions()
 	loadDialogue()
+	pickItems()
 end
 function renderProps()
 	chairSpr = spr(10, chairData.x, chairData.y, 0, 1, 0,0,1,1)
