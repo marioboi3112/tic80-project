@@ -9,12 +9,12 @@
 
 --adding props to the game
 --PROPS START
-chairData = {x=116 - 20, y=64-20}
-gunData = {id=17,x=106,y=40}
-tableData = {x=106, y=44}
-paintingData = {}
+local chairData = {x=116 - 20, y=64-20}
+local gunData = {id=17,x=106,y=40}
+local tableData = {x=106, y=44}
+local paintingData = {}
 --PROPS END
-
+t=0 --time variable
 player = {x=116,y=64} --player position at center.
 diagBox = {
 	x=0,
@@ -126,4 +126,5 @@ end
 function TIC()
 	cls(scr)
 	menu()
+	t=t+2
 end
