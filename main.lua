@@ -1,4 +1,4 @@
--- title:   git project
+--title:   git project
 -- author:  obi3112
 -- desc:    simple game that is coded for fun ig lol.
 -- site:    website link
@@ -9,10 +9,10 @@
 
 --adding props to the game
 --PROPS START
-local chairData = {x=116 - 20, y=64-20}
-local gunData = {id=17,x=106,y=40}
-local tableData = {x=106, y=44}
-local paintingData = {}
+chairData = {x=116 - 20, y=64-20}
+gunData = {id=17,x=106,y=40}
+tableData = {x=106, y=44}
+paintingData = {}
 --PROPS END
 t=0 --time variable
 player = {x=116,y=64} --player position at center.
@@ -22,6 +22,29 @@ diagBox = {
 	w=232+8,
 	h=50
 }
+--[[	oop shit]]--
+function Entity(x,y,w,h,col,id,colCode)
+	return {
+		id=id or "Entity",
+		x=x,
+		y=y,
+		w=w,
+		h=h,
+		col=col,
+		render = function(self,x,y,w,h,col)
+			rect(self.x,self.y,self.w,self.h,self.col)
+		end
+	}
+end
+
+function EntityNormalEnemy(id)
+	local normalEnemy = Entity()
+	normalEnemy.roar = function(self)
+		trace(self.id .. " roared!!!")
+	end
+	return normalEnemy
+end
+
 
 dialogueIndex = 1
 dialogues = {
@@ -39,13 +62,16 @@ function pickItems()
  local gunPlayerDistXPos=gunData.x - player.x
  local gunPlayerDistYPos=gunData.y - player.y
  print(gunPlayerDistXPos .. " " .. gunPlayerDistYPos, 0, 0, 12) 
+	if (gunPlayerDistYPos > 6 and gunPlayerDistYPos > 6) then 
+	 trace("pickable", math.random(1,12))
+	end
 end
 
 function menu()
 if mode=="menu"then
  for i=1, 100 do
- col=math.random(1,16)
  	for j=1, 100 do
+		 col=math.random(1,16)
 			circ(i*13, j*9, 3, col) 
  	end
  end
@@ -90,7 +116,7 @@ function moving_walls()
 	print(tostring("X: " .. player.x .. " Y: " .. player.y), 0, 18, 12)
 end
 function loadDialogue()
-	playerSpr = spr(256,player.x,player.y,14, 1, 0, 0,1,1)
+	playerSpr = spr(256,player.x,player.y,0, 1, 0, 0,1,1)
 	text = rectb(diagBox.x,diagBox.y,diagBox.w,diagBox.h, 12)
 	if keyp(26) then
 	 dialogueIndex = dialogueIndex + 1
@@ -109,22 +135,32 @@ function loadDialogue()
 	end
 	print(dialogues[dialogueIndex], diagBox.x, diagBox.y+5,12)
 end
+
+function renderer() --function to handle the rendering shit.
+	--INSTANCES
+	local player = Entity(10,10,5,5,4) --making a new instance of the entity class.
+	--METHODS
+	player:render() --call the render function on this dude
+end
+
 function game()
 	renderProps()
 	movePlayer()
 	playerCollisions()
 	loadDialogue()
 	pickItems()
+	renderer()
 end
 function renderProps()
 	chairSpr = spr(10, chairData.x, chairData.y, 0, 1, 0,0,1,1)
 	tableSpr = spr(11, tableData.x, tableData.y, 0,1,0,0,1,1,1)
-	gunSpr = spr(gunData.id, gunData.x, gunData.y,4,1,0,0,1,1,1)
+	gunSpr = spr(gunData.id, gunData.x, gunData.y,13,1,0,0,1,1,1)
 end
 
 
 function TIC()
-	cls(scr)
+ cls(scr)
 	menu()
-	t=t+2
+	
+	t=t+1
 end
