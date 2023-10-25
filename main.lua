@@ -1,5 +1,6 @@
---title:   git project
--- author:  obi3112
+
+--title:  tic80-project
+-- author:  obi3112 (marioboi3112 on github)
 -- desc:    simple game that is coded for fun ig lol.
 -- site:    website link
 -- license: MIT License (change this to your license of choice)
@@ -9,13 +10,14 @@
 
 --adding props to the game
 --PROPS START
-chairData = {x=116 - 20, y=64-20}
+local chairData = {x=116 - 20, y=64-20}
 gunData = {id=17,x=106,y=40}
 tableData = {x=106, y=44}
 paintingData = {}
 --PROPS END
+
 t=0 --time variable
-player = {x=116,y=64} --player position at center.
+player = {x=0,y=0} --player position at center.
 diagBox = {
 	x=0,
 	y=86,
@@ -23,7 +25,7 @@ diagBox = {
 	h=50
 }
 --[[	oop shit]]--
-function Entity(x,y,w,h,col,id,colCode)
+function Entity(col,x,y,w,h,id)
 	return {
 		id=id or "Entity",
 		x=x,
@@ -33,15 +35,26 @@ function Entity(x,y,w,h,col,id,colCode)
 		col=col,
 		render = function(self,x,y,w,h,col)
 			rect(self.x,self.y,self.w,self.h,self.col)
-		end
+		end,
+		displayName = function(self)
+			trace(self.id,self.col)
+		end,
+		move = function(self)
+			self.x = self.x + 3
+			self.y = self.y + 3
+			if self.x > 239 then 
+				self.x = 239
+			end
+			
+			if self.y > 135 then
+				self.y = 135
+			end
+		end,
 	}
 end
 
 function EntityNormalEnemy(id)
 	local normalEnemy = Entity()
-	normalEnemy.roar = function(self)
-		trace(self.id .. " roared!!!")
-	end
 	return normalEnemy
 end
 
@@ -57,17 +70,8 @@ dialogues = {
 }
 mode="menu" --default game state
 scr=15
-function pickItems()
- --pick gun
- local gunPlayerDistXPos=gunData.x - player.x
- local gunPlayerDistYPos=gunData.y - player.y
- print(gunPlayerDistXPos .. " " .. gunPlayerDistYPos, 0, 0, 12) 
-	if (gunPlayerDistYPos > 6 and gunPlayerDistYPos > 6) then 
-	 trace("pickable", math.random(1,12))
-	end
-end
 
-function menu()
+function gameState()
 if mode=="menu"then
  for i=1, 100 do
  	for j=1, 100 do
@@ -76,11 +80,21 @@ if mode=="menu"then
  	end
  end
  print("PRESS X TO PLAY", 50,50,0)
+ 
  if key(24) then
   mode="game"
  end
  elseif mode=="game" then  game()end
+	--SETTINGS
+	if key(22) then
+	  mode = "settings"
+	end
+	if mode == "settings" then
+		cls(scr)
+		print("SETTINGS TEST", 0, 0, 12)
+	end
 end
+
 function movePlayer()
 	if btn(0)then --up
 		player.y = player.y - 2
@@ -137,30 +151,71 @@ function loadDialogue()
 end
 
 function renderer() --function to handle the rendering shit.
+	local timer = time() / 1000
+	local sec = tonumber(timer)
+	print("timer: ".. sec,0,30,12)
 	--INSTANCES
-	local player = Entity(10,10,5,5,4) --making a new instance of the entity class.
-	--METHODS
-	player:render() --call the render function on this dude
+	local player = Entity(3,10,5,5,4) --making a new instance of the entity class.
+	--METHODS.
 end
-
 function game()
 	renderProps()
 	movePlayer()
 	playerCollisions()
 	loadDialogue()
-	pickItems()
-	renderer()
+	timer()
+	HUD()
 end
 function renderProps()
 	chairSpr = spr(10, chairData.x, chairData.y, 0, 1, 0,0,1,1)
 	tableSpr = spr(11, tableData.x, tableData.y, 0,1,0,0,1,1,1)
-	gunSpr = spr(gunData.id, gunData.x, gunData.y,13,1,0,0,1,1,1)
+end
+
+function RenderHUD(id,x,y,col,scale,flip,rotate,w,h)
+	return {
+		id=id,
+		x=x,
+		y=y,
+		col=col,
+		scale=1,
+		flip=0,
+		rotate=0,
+		w=1,
+		h=1, 
+		renderHUD = function(self)
+			spr(self.id, self.x, self.y, self.col, self.scale,self.flip,self.rotate,self.w,self.h)
+		end,
+		removeHUD = function(self) 
+			
+		end
+		}
+end
+
+
+function timer()
+	timeInSeconds = (time() / 1000)
+	--print(timeInSeconds, 0, 70,3,false,1,true)
+	print(string.sub(timeInSeconds,1,3),0,65,2)
+
+	--increment minute.
+	if tostring(timeInSeconds):sub(1,1)  == 20 then
+		string.gsub((string.sub((tostring(timeInSeconds)),1,1)), "1")
+	end
+end
+
+function HUD() --the HUD (head up display)
+	health = RenderHUD(1,5*8,-2,0,1)
+	health:renderHUD()
+	if time() // 1000 > 3	 then
+		health:removeHUD()	
+	end
+	
+	print("Health: ", 0,0,12)
 end
 
 
 function TIC()
  cls(scr)
-	menu()
-	
+	gameState()
 	t=t+1
 end
