@@ -1,4 +1,5 @@
 
+
 --title:  tic80-project
 -- author:  obi3112 (marioboi3112 on github)
 -- desc:    simple game that is coded for fun ig lol.
@@ -195,12 +196,11 @@ end
 function timer()
 	timeInSeconds = (time() / 1000)
 	--print(timeInSeconds, 0, 70,3,false,1,true)
-	print(string.sub(timeInSeconds,1,3),0,65,2)
-
 	--increment minute.
 	if tostring(timeInSeconds):sub(1,1)  == 20 then
 		string.gsub((string.sub((tostring(timeInSeconds)),1,1)), "1")
 	end
+  print(string.sub(timeInSeconds,1,3),0,65,2)
 end
 
 function HUD() --the HUD (head up display)
