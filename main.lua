@@ -1,5 +1,6 @@
 
 
+
 --title:  tic80-project
 -- author:  obi3112 (marioboi3112 on github)
 -- desc:    simple game that is coded for fun ig lol.
@@ -12,21 +13,21 @@
 --adding props to the game
 --PROPS START
 local chairData = {x=116 - 20, y=64-20}
-gunData = {id=17,x=106,y=40}
-tableData = {x=106, y=44}
-paintingData = {}
+local gunData = {id=17,x=106,y=40}
+local tableData = {x=106, y=44}
+local paintingData = {}
 --PROPS END
 
 t=0 --time variable
-player = {x=0,y=0} --player position at center.
-diagBox = {
+local player = {x=0,y=0} --player position at center.
+local diagBox = {
 	x=0,
 	y=86,
 	w=232+8,
 	h=50
 }
 --[[	oop shit]]--
-function Entity(col,x,y,w,h,id)
+function Entity(col,x,y,w,h,id) --simple entity class.
 	return {
 		id=id or "Entity",
 		x=x,
@@ -40,23 +41,7 @@ function Entity(col,x,y,w,h,id)
 		displayName = function(self)
 			trace(self.id,self.col)
 		end,
-		move = function(self)
-			self.x = self.x + 3
-			self.y = self.y + 3
-			if self.x > 239 then 
-				self.x = 239
-			end
-			
-			if self.y > 135 then
-				self.y = 135
-			end
-		end,
-	}
-end
-
-function EntityNormalEnemy(id)
-	local normalEnemy = Entity()
-	return normalEnemy
+		}
 end
 
 
@@ -80,6 +65,7 @@ if mode=="menu"then
 			circ(i*13, j*9, 3, col) 
  	end
  end
+ 
  print("PRESS X TO PLAY", 50,50,0)
  
  if key(24) then
@@ -149,6 +135,8 @@ function loadDialogue()
 		end
 	end
 	print(dialogues[dialogueIndex], diagBox.x, diagBox.y+5,12)
+  --rendering the z symbol to show that the player needs to press on the Z key
+  spr()
 end
 
 function renderer() --function to handle the rendering shit.
@@ -187,7 +175,7 @@ function RenderHUD(id,x,y,col,scale,flip,rotate,w,h)
 			spr(self.id, self.x, self.y, self.col, self.scale,self.flip,self.rotate,self.w,self.h)
 		end,
 		removeHUD = function(self) 
-			
+		  self.w, self.h = 0,0 --get rid off the HUD object.	
 		end
 		}
 end
